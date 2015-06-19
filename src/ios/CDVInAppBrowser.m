@@ -585,15 +585,27 @@
     self.addressLabel.textColor = [UIColor colorWithWhite:1.000 alpha:1.000];
     self.addressLabel.userInteractionEnabled = NO;
 
-    NSString* frontArrowString = NSLocalizedString(@"►", nil); // create arrow from Unicode char
-    self.forwardButton = [[UIBarButtonItem alloc] initWithTitle:frontArrowString style:UIBarButtonItemStylePlain target:self action:@selector(goForward:)];
+    UIImage *toolbarForwardImage = [[UIImage imageNamed:@"toolbarForward.png"]
+            imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:toolbarForwardImage
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self action:@selector(goForward:)];
     self.forwardButton.enabled = YES;
     self.forwardButton.imageInsets = UIEdgeInsetsZero;
 
-    NSString* backArrowString = NSLocalizedString(@"◄", nil); // create arrow from Unicode char
-    self.backButton = [[UIBarButtonItem alloc] initWithTitle:backArrowString style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+    UIImage *toolbarBackImage = [[UIImage imageNamed:@"toolbarBack.png"]
+            imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:toolbarBackImage
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(goBack:)];
     self.backButton.enabled = YES;
     self.backButton.imageInsets = UIEdgeInsetsZero;
+
+    if (toolbarStyle == UIBarStyleBlack) {
+        self.forwardButton.tintColor = [UIColor whiteColor];
+        self.backButton.tintColor = [UIColor whiteColor];
+    }
 
     [self.toolbar setItems:@[self.closeButton, flexibleSpaceButton, self.backButton, fixedSpaceButton, self.forwardButton]];
 
