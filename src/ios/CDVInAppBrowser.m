@@ -605,6 +605,8 @@
     if (toolbarStyle == UIBarStyleBlack) {
         self.forwardButton.tintColor = [UIColor whiteColor];
         self.backButton.tintColor = [UIColor whiteColor];
+
+        self.closeButton.tintColor = [UIColor whiteColor];
     }
 
     [self.toolbar setItems:@[self.closeButton, flexibleSpaceButton, self.backButton, fixedSpaceButton, self.forwardButton]];
