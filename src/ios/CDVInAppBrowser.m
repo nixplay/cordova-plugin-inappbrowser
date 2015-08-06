@@ -512,8 +512,9 @@
     self.webView.opaque = YES;
     self.webView.scalesPageToFit = NO;
     self.webView.userInteractionEnabled = YES;
-
-    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
+                    toolbarStyle == UIBarStyleBlack ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray];
     self.spinner.alpha = 1.000;
     self.spinner.autoresizesSubviews = YES;
     self.spinner.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
@@ -605,16 +606,17 @@
     if (toolbarStyle == UIBarStyleBlack) {
         self.forwardButton.tintColor = [UIColor whiteColor];
         self.backButton.tintColor = [UIColor whiteColor];
-
+        
         self.closeButton.tintColor = [UIColor whiteColor];
     }
-
-    [self.toolbar setItems:@[self.closeButton, flexibleSpaceButton, self.backButton, fixedSpaceButton, self.forwardButton]];
-
+    
+    UIBarButtonItem *spinnerButton = [[UIBarButtonItem alloc] initWithCustomView:self.spinner];
+    
+    [self.toolbar setItems:@[self.closeButton, flexibleSpaceButton, spinnerButton, fixedSpaceButton, self.backButton, fixedSpaceButton, self.forwardButton]];
+    
     self.view.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.toolbar];
     [self.view addSubview:self.addressLabel];
-    [self.view addSubview:self.spinner];
 }
 
 - (void) setWebViewFrame : (CGRect) frame {
